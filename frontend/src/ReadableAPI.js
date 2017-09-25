@@ -12,10 +12,12 @@ export const getCategories = () =>
 
 export const getAllPosts = () =>
   fetch(`${api}/posts`, { headers })
-    .then(res => res.json())
-    .then(data => data);
+    .then(res => res.json());
 
 export const getPostsByCategory = (category) =>
   fetch(`${api}/${category}/posts`, { headers })
-    .then(res => res.json())
-    .then(data => data);
+    .then(res => res.json());
+
+export const getPost = (id) =>
+  fetch(`${api}/posts/${id}`, { headers })
+    .then(res => res.json());
