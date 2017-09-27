@@ -22,6 +22,14 @@ export const getPost = (id) =>
   fetch(`${api}/posts/${id}`, { headers })
     .then(res => res.json());
 
+export const createPost = (post) =>
+  fetch(`${api}/posts/`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(post),
+    })
+    .then(res => res.json());
+
 export const getPostComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json());

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as ReadableAPI from './ReadableAPI';
+import CreatePost from './CreatePost';
 
 class CategoriesList extends Component {
   state = {
@@ -48,6 +49,7 @@ class CategoriesList extends Component {
             })}
           </div>
         </div>
+        <CreatePost />
       </div>
     );
   }
