@@ -2,7 +2,8 @@ const api = 'http://localhost:3001';
 
 const headers = {
   Accept: 'application/json',
-  Authorization: Math.random().toString(36).substr(-8),
+  'Content-Type': 'application/json',
+  Authorization: 'cqhou44yhla8ib4f',
 };
 
 export const getCategories = () =>

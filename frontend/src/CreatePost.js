@@ -13,13 +13,11 @@ class CreatePost extends Component {
     const post = {
       ...this.state,
       timestamp,
-      id: timestamp,
+      id: Math.random().toString(36).substr(-8),
     };
     console.log(post);
     ReadableAPI.createPost(post).then((response) => {
       console.log(response);
-      //TODO: we should save this post in redux state
-      //because server doesn't save it
     });
 
     event.preventDefault();
