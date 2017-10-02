@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import * as ReadableAPI from './ReadableAPI';
+import * as ReadableAPI from '../utils/ReadableAPI';
 import CreatePost from './CreatePost';
 
 class CategoriesList extends Component {
