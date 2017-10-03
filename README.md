@@ -4,6 +4,13 @@ This is the starter project for the final assessment project for Udacity's Redux
 
 This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
 
+## Data
+There are three types of objects stored on the server:
+
+* Categories
+* Posts
+* Comments
+
 ## Start Developing
 
 To get started developing right away:
