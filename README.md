@@ -4,6 +4,30 @@ This is the starter project for the final assessment project for Udacity's Redux
 
 This repository includes the code for the backend API Server that you'll use to develop and interact with the front-end portion of the project.
 
+## How to start
+1. Clone this repository
+  ```bash
+  $> git clone https://github.com/RusPosevkin/readable.git
+  ```
+
+2. Install dependencies
+  ```bash
+  $> cd ./readable
+  $> yarn
+  ```
+
+3. Start backend server
+  ```bash
+  $> node server
+  ```
+
+4. Start server
+  ```bash
+  $> yarn start
+  ```
+
+5. Open a browser and visit http://localhost:3000/
+
 ## Data
 There are three types of objects stored on the server:
 
