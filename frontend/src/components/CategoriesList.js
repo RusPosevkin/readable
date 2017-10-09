@@ -9,14 +9,7 @@ class CategoriesList extends Component {
   };
 
   componentDidMount() {
-    this.getCategories();
     this.getAllPosts();
-  };
-
-  getCategories = () => {
-    ReadableAPI.getCategories().then((categories) => {
-      this.setState({ categories });
-    });
   };
 
   getAllPosts= () => {
@@ -30,7 +23,7 @@ class CategoriesList extends Component {
       <div>
         <div className="categories">
           <h1>Categories List</h1>
-          {this.state.categories.map((category) => (
+          {this.props.categories.map((category) => (
             <div key={category.name}>
               <a href={category.path}>{category.name}</a>
             </div>

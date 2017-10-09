@@ -6,6 +6,7 @@ function posts(state = {}, action) {
   switch (action.type) {
     case CREATE_POST :
       const { post } = action;
+      console.log('CREATE_POST');
 
       return {
         ...state,
