@@ -15,11 +15,7 @@ class CreatePost extends Component {
       timestamp,
       id: Math.random().toString(36).substr(-8),
     };
-    console.log(post);
-    ReadableAPI.createPost(post).then((response) => {
-      console.log(response);
-    });
-
+    this.props.createPost(post);
     event.preventDefault();
   };
 
