@@ -13,7 +13,6 @@ import * as ReadableAPI from '../utils/ReadableAPI';
 class App extends Component {
   state = {
     categories: [],
-    posts: [],
   };
 
   getCategories = () => {
@@ -22,27 +21,12 @@ class App extends Component {
     });
   };
 
-  getAllPosts = () => {
-    ReadableAPI.getAllPosts().then((posts) => {
-      this.setState({ posts });
-    });
-  };
-
-  createPost = (post) => {
-    ReadableAPI.createPost(post).then((response) => {
-      const posts = this.state.posts;
-      posts.push(response);
-      this.setState({ posts });
-    });
-  };
-
   componentDidMount() {
     this.getCategories();
-    this.getAllPosts();
   };
 
   render() {
-    const { categories, posts } = this.state;
+    const { categories } = this.state;
 
     return (
       <div className="App">
@@ -53,11 +37,9 @@ class App extends Component {
                   <CategoriesList
                     categories={categories}
                   />
-                  <PostsList
-                    posts={posts}
-                  />
+                  <PostsList/>
                   <CreatePost
-                    createPost={this.createPost}
+                    createPost={createPost}
                   />
                 </div>
               );
@@ -83,4 +65,4 @@ function mapDispatchToProps(dispatch) {
   };
 };
 
-export default connect(mapDispatchToProps)(App);
+export default App;

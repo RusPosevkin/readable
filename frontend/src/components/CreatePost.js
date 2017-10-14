@@ -15,6 +15,7 @@ class CreatePost extends Component {
       timestamp,
       id: Math.random().toString(36).substr(-8),
     };
+    console.log(this.props.createPost);
     this.props.createPost(post);
     event.preventDefault();
   };
