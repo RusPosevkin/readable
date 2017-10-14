@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getAllPosts } from '../actions';
+import { getAllPosts } from '../actions/posts';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 

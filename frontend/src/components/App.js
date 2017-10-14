@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
-import { createPost } from '../actions';
+import { createPost } from '../actions/posts';
 import CategoriesList from './CategoriesList';
 import PostsList from './PostsList';
 import Category from './Category';
