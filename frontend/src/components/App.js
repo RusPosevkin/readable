@@ -19,9 +19,7 @@ class App extends Component {
                 <div>
                   <CategoriesList/>
                   <PostsList/>
-                  <CreatePost
-                    createPost={createPost}
-                  />
+                  <CreatePost/>
                 </div>
               );
             }

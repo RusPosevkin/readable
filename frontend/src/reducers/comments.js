@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import {
   GET_COMMENTS
 } from '../actions/comments';

@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
+import { createPost } from '../actions/posts';
+import { connect } from 'react-redux';
+
+const DEFAULT_STATE = {
+  title: '',
+  body: '',
+  category: 'redux',
+  author: '',
+};
 
 class CreatePost extends Component {
-  state = {
-    title: '',
-    body: '',
-    category: 'redux',
+  state = {};
+
+  componentDidMount() {
+    this.setDefaultState();
+  };
+
+  setDefaultState() {
+    this.setState(DEFAULT_STATE);
   };
 
   createPost(event) {
@@ -15,8 +28,8 @@ class CreatePost extends Component {
       timestamp,
       id: Math.random().toString(36).substr(-8),
     };
-    console.log(this.props.createPost);
     this.props.createPost(post);
+    this.setDefaultState();
     event.preventDefault();
   };
 
@@ -31,15 +44,15 @@ class CreatePost extends Component {
         <form onSubmit={this.createPost.bind(this)}>
           <p>
             <label htmlFor="title">Post Title: </label>
-            <input name="title" id="title" onChange={this.handleChange.bind(this)}/>
+            <input name="title" id="title" value={this.state.title} onChange={this.handleChange.bind(this)}/>
           </p>
           <p>
             <label htmlFor="author">Your name: </label>
-            <input name="author" id="author" onChange={this.handleChange.bind(this)}/>
+            <input name="author" id="author" value={this.state.author} onChange={this.handleChange.bind(this)}/>
           </p>
           <p>
             <label htmlFor="category">Post Category: </label>
-            <select id="category" name="category" onChange={this.handleChange.bind(this)}>
+            <select id="category" name="category" value={this.state.category} onChange={this.handleChange.bind(this)}>
               <option value="redux">Redux</option>
               <option value="react">React</option>
               <option value="udacity">Udacity</option>
@@ -52,6 +65,7 @@ class CreatePost extends Component {
               id="body"
               cols="30"
               rows="10"
+              value={this.state.body}
               onChange={this.handleChange.bind(this)}
             ></textarea>
           </p>
@@ -65,4 +79,14 @@ class CreatePost extends Component {
   }
 }
 
-export default CreatePost;
+function mapStateToProps(state, ownProps) {
+  console.log('CreatePost mapStateToProps', state, ownProps);
+  const { posts } = state;
+  return {
+    posts,
+  };
+};
+
+export default connect(mapStateToProps, {
+  createPost,
+})(CreatePost);
