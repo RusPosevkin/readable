@@ -42,3 +42,23 @@ export const updatePost = (id, data) =>
 export const getPostComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json());
+
+export const getComment = (id) =>
+  fetch(`${api}/comments/${id}`, { headers })
+    .then(res => res.json());
+
+export const updateComment = (id, data) =>
+    fetch(`${api}/comments/${id}`, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify(data),
+      })
+      .then(res => res.json());
+
+export const createComment = (comment) =>
+  fetch(`${api}/comments`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify(comment),
+    })
+    .then(res => res.json());

@@ -4,6 +4,7 @@ import { getComments } from '../actions/comments';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Link } from 'react-router-dom'
+import CreateEditComment from './CreateEditComment';
 
 class Post extends Component {
   componentDidMount() {
@@ -34,7 +35,8 @@ class Post extends Component {
           <div>
             <h1>{content.title}</h1>
             <h2>{content.author} {content.timestamp ? (getDate(content.timestamp)) : ''}</h2>
-            <Link to={`${this.props.match.url}/edit`}>Edit post</Link>
+              <Link to={`${this.props.match.url}/edit`}>[Edit post]</Link>
+
             <p>{content.body}</p>
           </div>
         )}
@@ -44,11 +46,13 @@ class Post extends Component {
             {comments.map((comment) => (
               <div key={comment.id}>
                 <h5>{comment.author} ({getDate(comment.timestamp)})</h5>
+                <Link to={`${this.props.match.url}/${comment.id}/edit`}>[Edit comment]</Link>
                 <p>{comment.body}</p>
               </div>
             ))}
           </div>
         ) : ''}
+        <CreateEditComment postId={postId}/>
       </div>
     );
   }

@@ -7,6 +7,7 @@ import CategoriesList from './CategoriesList';
 import PostsList from './PostsList';
 import Post from './Post';
 import CreateEditPost from './CreateEditPost';
+import CreateEditComment from './CreateEditComment';
 import * as ReadableAPI from '../utils/ReadableAPI';
 
 class App extends Component {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route exact path='/:category' component={PostsList}/>
           <Route exact path='/:category/:postId' component={Post}/>
           <Route exact path='/:category/:postId/:operation' component={CreateEditPost}/>
+          <Route exact path='/:category/:postId/:commentId/:operation' component={CreateEditComment}/>
         </Switch>
       </div>
     );

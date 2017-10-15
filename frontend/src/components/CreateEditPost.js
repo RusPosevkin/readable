@@ -4,7 +4,6 @@ import { createPost, updatePost } from '../actions/posts';
 import { connect } from 'react-redux';
 import { getPost } from '../actions/posts';
 import _ from 'lodash';
-import { Redirect } from 'react-router';
 
 const DEFAULT_STATE = {
   title: '',
@@ -12,7 +11,6 @@ const DEFAULT_STATE = {
   category: 'redux',
   author: '',
   isEditMode: false,
-  fireRedirect: false,
 };
 
 class CreateEditPost extends Component {
@@ -49,15 +47,23 @@ class CreateEditPost extends Component {
   updatePost() {
     console.log('updatePost');
     const { title, body, category, author } = this.state;
+    const timestamp = Date.now();
     const post = {
       title,
       body,
       category,
       author,
+      timestamp,
     };
     const postId = _.get(this.props, 'match.params.postId');
     this.props.updatePost(postId, post);
-    this.setState({ fireRedirect: true });
+
+    // create new URL if category was changed
+    if (post.category !== this.props.posts[postId].category) {
+      this.props.history.push(`/${post.category}/${postId}`);
+    } else {
+      this.props.history.goBack();
+    }
   };
 
   createPost() {
@@ -80,11 +86,10 @@ class CreateEditPost extends Component {
   };
 
   render() {
-    const buttonText = this.state.isEditMode ? 'Update Post' : 'Create Post';
-    const { fireRedirect } = this.state;
+    const actionVerb = this.state.isEditMode ? 'Update' : 'Create';
     return (
       <div className="create-post">
-        <h3>Create New Post</h3>
+        <h3>{`${actionVerb} Post`}</h3>
         <form onSubmit={this.onSubmit.bind(this)}>
           <p>
             <label htmlFor="title">Post Title: </label>
@@ -115,12 +120,9 @@ class CreateEditPost extends Component {
           </p>
           <input
             type="submit"
-            value={buttonText}
+            value={`${actionVerb} Post`}
           />
         </form>
-        {fireRedirect && (
-          <Redirect to={'/'}/>
-        )}
       </div>
     );
   }
