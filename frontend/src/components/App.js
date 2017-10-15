@@ -27,10 +27,7 @@ class App extends Component {
               );
             }
           }/>
-          <Route exact path='/:category' render={() => (
-              <Category
-              />
-            )}/>
+          <Route exact path='/:category' component={PostsList}/>
           <Route exact path='/:category/:post_id' render={() => (
               <Post
               />
