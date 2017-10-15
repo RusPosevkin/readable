@@ -15,7 +15,7 @@ const DEFAULT_STATE = {
   fireRedirect: false,
 };
 
-class CreatePost extends Component {
+class CreateEditPost extends Component {
   state = {};
 
   componentDidMount() {
@@ -127,7 +127,7 @@ class CreatePost extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('CreatePost mapStateToProps', state, ownProps);
+  console.log('CreateEditPost mapStateToProps', state, ownProps);
 
   const { posts } = state;
   return {
@@ -139,4 +139,4 @@ export default connect(mapStateToProps, {
   createPost,
   getPost,
   updatePost,
-})(CreatePost);
+})(CreateEditPost);
