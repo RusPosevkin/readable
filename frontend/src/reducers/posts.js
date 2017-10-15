@@ -19,7 +19,7 @@ export default function posts(state = {}, action) {
     case GET_POSTS:
       console.log('GET_POSTS', state, data);
       return _.mapKeys(data, 'id');
-    default :
+    default:
       return state;
   }
 };

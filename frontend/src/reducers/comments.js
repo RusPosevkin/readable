@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 export default function posts(state = {}, action) {
   switch (action.type) {
-    default :
+    default:
       return state;
   }
 };

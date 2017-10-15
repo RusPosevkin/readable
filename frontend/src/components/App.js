@@ -11,32 +11,14 @@ import CreatePost from './CreatePost';
 import * as ReadableAPI from '../utils/ReadableAPI';
 
 class App extends Component {
-  state = {
-    categories: [],
-  };
-
-  getCategories = () => {
-    ReadableAPI.getCategories().then((categories) => {
-      this.setState({ categories });
-    });
-  };
-
-  componentDidMount() {
-    this.getCategories();
-  };
-
   render() {
-    const { categories } = this.state;
-
     return (
       <div className="App">
         <Switch>
           <Route exact path='/' render={() => {
               return (
                 <div>
-                  <CategoriesList
-                    categories={categories}
-                  />
+                  <CategoriesList/>
                   <PostsList/>
                   <CreatePost
                     createPost={createPost}
