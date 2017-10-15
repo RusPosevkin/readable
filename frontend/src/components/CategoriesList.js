@@ -26,7 +26,7 @@ class CategoriesList extends Component {
 
 function mapStateToProps(state, ownProps) {
   console.log('CategoriesList mapStateToProps', state, ownProps);
-  return { categories: state.categories };
+  return { categories: state.categories, posts: state.posts };
 };
 
 export default connect(mapStateToProps, {

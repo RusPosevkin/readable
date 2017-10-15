@@ -1,37 +1,17 @@
 import React, { Component } from 'react';
-import * as ReadableAPI from '../utils/ReadableAPI';
-import { withRouter } from 'react-router';
+import { getPost } from '../actions/posts';
+import { getComments } from '../actions/comments';
+import { connect } from 'react-redux';
+import _ from 'lodash';
+
 
 class Post extends Component {
-  state = {
-    content: {},
-    comments: [],
-  };
-
   componentDidMount() {
-    this.getPost();
-    this.getPostComments();
-  };
-
-  getPost = () => {
-    const postId = this.props.match.params.post_id;
-
-    ReadableAPI.getPost(postId).then((content) => {
-      this.setState({ content });
-    });
-  };
-
-  getPostComments = () => {
-    const postId = this.props.match.params.post_id;
-
-    ReadableAPI.getPostComments(postId).then((comments) => {
-      this.setState({ comments });
-    });
+    const postId = _.get(this.props, 'match.params.postId');
+    this.props.getPost(postId);
   };
 
   render() {
-    const content = this.state.content;
-
     const getDate = (timestamp) => {
       const date = new Date();
       date.setTime(timestamp);
@@ -43,17 +23,21 @@ class Post extends Component {
       ].join('/');
     };
 
-    const comments = this.state.comments;
+    const postId = _.get(this.props, 'match.params.postId');
+    const content = this.props.posts[postId];
+    const commentsData = _.get(this.props, 'comments', {});
+    const comments = commentsData[postId];
+
     return (
       <div className="post">
-        {content.body && (
+        {content && (
           <div>
             <h1>{content.title}</h1>
             <h2>{content.author} {content.timestamp ? (getDate(content.timestamp)) : ''}</h2>
             <p>{content.body}</p>
           </div>
         )}
-        {comments.length ? (
+        {comments && comments.length ? (
           <div className="comments">
             <h3>Comments</h3>
             {comments.map((comment) => (
@@ -69,4 +53,16 @@ class Post extends Component {
   }
 }
 
-export default withRouter(Post);
+function mapStateToProps(state, ownProps) {
+  console.log('Post mapStateToProps', state, ownProps);
+  const { posts, comments } = state;
+  return {
+    posts,
+    comments,
+  };
+};
+
+export default connect(mapStateToProps, {
+  getPost,
+  getComments,
+})(Post);
