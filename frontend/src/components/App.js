@@ -5,7 +5,6 @@ import { Switch, Route } from 'react-router-dom';
 import { createPost } from '../actions/posts';
 import CategoriesList from './CategoriesList';
 import PostsList from './PostsList';
-import Category from './Category';
 import Post from './Post';
 import CreatePost from './CreatePost';
 import * as ReadableAPI from '../utils/ReadableAPI';
