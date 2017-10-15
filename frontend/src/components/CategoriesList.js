@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { getCategories } from '../actions/categories';
 import { connect } from 'react-redux';
 
-
 class CategoriesList extends Component {
   componentDidMount() {
     this.props.getCategories();
@@ -14,7 +13,7 @@ class CategoriesList extends Component {
     return (
       <div className="categories">
         <h1>Categories List</h1>
-        {categories.map((category) => (
+        {categories.length && categories.map((category) => (
           <div key={category.name}>
             <a href={category.path}>{category.name}</a>
           </div>

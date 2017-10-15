@@ -20,8 +20,6 @@ class PostsList extends Component {
       <div className="posts">
         <h1>{header}</h1>
         <div>
-
-
           {sortedPosts.length ? sortedPosts.map((post) => {
             const url = ['/', post.category, '/', post.id].join('');
             return (

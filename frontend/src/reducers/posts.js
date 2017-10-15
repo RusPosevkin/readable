@@ -3,6 +3,7 @@ import {
   CREATE_POST,
   GET_POSTS,
   GET_POST,
+  UPDATE_POST,
 } from '../actions/posts';
 
 export default function posts(state = {}, action) {
@@ -18,6 +19,9 @@ export default function posts(state = {}, action) {
       return _.mapKeys(data, 'id');
     case GET_POST :
       console.log('GET_POST', state, data);
+      return { ...state, [data.id]: data };
+    case UPDATE_POST :
+      console.log('UPDATE_POST', state, data);
       return { ...state, [data.id]: data };
     default:
       return state;

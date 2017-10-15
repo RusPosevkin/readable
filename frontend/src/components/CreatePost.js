@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import * as ReadableAPI from '../utils/ReadableAPI';
-import { createPost } from '../actions/posts';
+import { createPost, updatePost } from '../actions/posts';
 import { connect } from 'react-redux';
+import { getPost } from '../actions/posts';
+import _ from 'lodash';
+import { Redirect } from 'react-router';
 
 const DEFAULT_STATE = {
   title: '',
   body: '',
   category: 'redux',
   author: '',
+  isEditMode: false,
+  fireRedirect: false,
 };
 
 class CreatePost extends Component {
@@ -15,22 +20,59 @@ class CreatePost extends Component {
 
   componentDidMount() {
     this.setDefaultState();
+    const operation = _.get(this.props, 'match.params.operation');
+    if (operation === 'edit') {
+      this.setState({ isEditMode: true });
+      const postId = _.get(this.props, 'match.params.postId');
+      this.props.getPost(postId);
+    }
+  };
+
+  componentWillReceiveProps(nextProps) {
+    if (!this.state.isEditMode) {
+      return;
+    }
+    const postId = _.get(this.props, 'match.params.postId');
+    const { title, body, category, author } = nextProps.posts[postId];
+    this.setState({ title, body, category, author });
   };
 
   setDefaultState() {
     this.setState(DEFAULT_STATE);
   };
 
-  createPost(event) {
-    const timestamp = Date.now();
+  onSubmit(event) {
+    (this.state.isEditMode) ? this.updatePost() : this.createPost();
+    event.preventDefault();
+  };
+
+  updatePost() {
+    console.log('updatePost');
+    const { title, body, category, author } = this.state;
     const post = {
-      ...this.state,
+      title,
+      body,
+      category,
+      author,
+    };
+    const postId = _.get(this.props, 'match.params.postId');
+    this.props.updatePost(postId, post);
+    this.setState({ fireRedirect: true });
+  };
+
+  createPost() {
+    const timestamp = Date.now();
+    const { title, body, category, author } = this.state;
+    const post = {
+      title,
+      body,
+      category,
+      author,
       timestamp,
       id: Math.random().toString(36).substr(-8),
     };
     this.props.createPost(post);
     this.setDefaultState();
-    event.preventDefault();
   };
 
   handleChange(event) {
@@ -38,13 +80,15 @@ class CreatePost extends Component {
   };
 
   render() {
+    const buttonText = this.state.isEditMode ? 'Update Post' : 'Create Post';
+    const { fireRedirect } = this.state;
     return (
       <div className="create-post">
         <h3>Create New Post</h3>
-        <form onSubmit={this.createPost.bind(this)}>
+        <form onSubmit={this.onSubmit.bind(this)}>
           <p>
             <label htmlFor="title">Post Title: </label>
-            <input name="title" id="title" value={this.state.title} onChange={this.handleChange.bind(this)}/>
+            <input name="title" id="title"  value={this.state.title} onChange={this.handleChange.bind(this)}/>
           </p>
           <p>
             <label htmlFor="author">Your name: </label>
@@ -71,9 +115,12 @@ class CreatePost extends Component {
           </p>
           <input
             type="submit"
-            value="Create"
+            value={buttonText}
           />
         </form>
+        {fireRedirect && (
+          <Redirect to={'/'}/>
+        )}
       </div>
     );
   }
@@ -81,6 +128,7 @@ class CreatePost extends Component {
 
 function mapStateToProps(state, ownProps) {
   console.log('CreatePost mapStateToProps', state, ownProps);
+
   const { posts } = state;
   return {
     posts,
@@ -89,4 +137,6 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(mapStateToProps, {
   createPost,
+  getPost,
+  updatePost,
 })(CreatePost);

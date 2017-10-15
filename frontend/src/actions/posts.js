@@ -1,9 +1,11 @@
 import * as ReadableAPI from '../utils/ReadableAPI';
 import { getComments } from './comments';
+import { getCategories } from './categories';
 
 export const CREATE_POST = 'CREATE_POST';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
+export const UPDATE_POST = 'UPDATE_POST';
 
 export function createPost(post) {
   console.log('createPost action');
@@ -39,5 +41,17 @@ export function getPost(postId) {
       });
       dispatch(getComments(postId));
     }).then((data) => console.log('getPost done', data));
+  };
+};
+
+export function updatePost(postId, post) {
+  console.log('updatePost action');
+  return dispatch => {
+    ReadableAPI.updatePost(postId, post).then((data) => {
+      dispatch({
+        type: UPDATE_POST,
+        data,
+      });
+    });
   };
 };

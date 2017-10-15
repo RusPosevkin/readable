@@ -3,7 +3,7 @@ import { getPost } from '../actions/posts';
 import { getComments } from '../actions/comments';
 import { connect } from 'react-redux';
 import _ from 'lodash';
-
+import { Link } from 'react-router-dom'
 
 class Post extends Component {
   componentDidMount() {
@@ -34,6 +34,7 @@ class Post extends Component {
           <div>
             <h1>{content.title}</h1>
             <h2>{content.author} {content.timestamp ? (getDate(content.timestamp)) : ''}</h2>
+            <Link to={`${this.props.match.url}/edit`}>Edit post</Link>
             <p>{content.body}</p>
           </div>
         )}

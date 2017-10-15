@@ -26,6 +26,7 @@ class App extends Component {
           }/>
           <Route exact path='/:category' component={PostsList}/>
           <Route exact path='/:category/:postId' component={Post}/>
+          <Route exact path='/:category/:postId/:operation' component={CreatePost}/>
         </Switch>
       </div>
     );

@@ -31,6 +31,14 @@ export const createPost = (post) =>
     })
     .then(res => res.json());
 
+export const updatePost = (id, data) =>
+  fetch(`${api}/posts/${id}`, {
+      method: 'PUT',
+      headers,
+      body: JSON.stringify(data),
+    })
+    .then(res => res.json());
+
 export const getPostComments = (id) =>
   fetch(`${api}/posts/${id}/comments`, { headers })
     .then(res => res.json());
