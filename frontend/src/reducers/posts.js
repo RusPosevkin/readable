@@ -4,6 +4,7 @@ import {
   GET_POSTS,
   GET_POST,
   UPDATE_POST,
+  VOTE_POST,
 } from '../actions/posts';
 
 export default function posts(state = {}, action) {
@@ -22,6 +23,9 @@ export default function posts(state = {}, action) {
       return { ...state, [data.id]: data };
     case UPDATE_POST :
       console.log('UPDATE_POST', state, data);
+      return { ...state, [data.id]: data };
+    case VOTE_POST :
+      console.log('VOTE_POST', state, data);
       return { ...state, [data.id]: data };
     default:
       return state;

@@ -6,6 +6,7 @@ export const CREATE_POST = 'CREATE_POST';
 export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
 export const UPDATE_POST = 'UPDATE_POST';
+export const VOTE_POST = 'VOTE_POST';
 
 export function createPost(post) {
   console.log('createPost action');
@@ -53,5 +54,17 @@ export function updatePost(postId, post) {
         data,
       });
     });
+  };
+};
+
+export function votePost(postId, post) {
+  console.log('votePost action');
+  return dispatch => {
+    ReadableAPI.votePost(postId, post).then((data) => {
+      dispatch({
+        type: VOTE_POST,
+        data,
+      });
+    }).then(() => {dispatch(getPost(postId))});
   };
 };

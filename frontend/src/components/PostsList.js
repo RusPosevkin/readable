@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getAllPosts } from '../actions/posts';
 import { connect } from 'react-redux';
+import Vote from './Vote';
 import _ from 'lodash';
 
 class PostsList extends Component {
@@ -25,6 +26,8 @@ class PostsList extends Component {
             return (
               <div key={post.id}>
                 <a href={url}>{post.title}</a>
+                <span> | </span>
+                <Vote source={post} type="post"/>
               </div>
             );
           }) : 'There is no any post :('}
