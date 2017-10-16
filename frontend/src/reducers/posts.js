@@ -30,7 +30,6 @@ export default function posts(state = {}, action) {
       return { ...state, [data.id]: data };
     case DELETE_POST :
       console.log('DELETE_POST', state, data);
-      debugger;
       return { ...state, [data.id]: data };
     default:
       return state;

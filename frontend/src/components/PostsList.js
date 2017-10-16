@@ -3,6 +3,8 @@ import { getAllPosts } from '../actions/posts';
 import { connect } from 'react-redux';
 import Vote from './Vote';
 import _ from 'lodash';
+import Delete from './Delete';
+import { Link } from 'react-router-dom';
 
 class PostsList extends Component {
   componentDidMount() {
@@ -26,6 +28,8 @@ class PostsList extends Component {
             return (
               <div key={post.id}>
                 <a href={url}>{post.title}</a>
+                <span> | </span>
+                <Delete source={post} type="post"/>
                 <span> | </span>
                 <Vote source={post} type="post"/>
               </div>
