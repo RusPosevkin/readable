@@ -5,6 +5,7 @@ export const GET_COMMENT = 'GET_COMMENT';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
 export const VOTE_COMMENT = 'VOTE_COMMENT';
+export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export function getComments(postId) {
   return dispatch => {
@@ -69,5 +70,17 @@ export function voteComment(commentId, comment) {
         data,
       });
     }).then(() => {dispatch(getComment(commentId))});
+  };
+};
+
+export function deleteComment(commentId, parentId) {
+  console.log('deleteComment action');
+  return dispatch => {
+    ReadableAPI.deleteComment(commentId).then((data) => {
+      dispatch({
+        type: DELETE_COMMENT,
+        data,
+      });
+    }).then(() => {dispatch(getComments(parentId))});
   };
 };

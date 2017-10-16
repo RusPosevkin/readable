@@ -4,6 +4,7 @@ import {
   CREATE_COMMENT,
   UPDATE_COMMENT,
   VOTE_COMMENT,
+  DELETE_COMMENT,
 } from '../actions/comments';
 import _ from 'lodash';
 
@@ -24,6 +25,9 @@ export default function comments(state = {}, action) {
       const index = _.findIndex(comment, (item) => item.id === data.id);
       comment.splice(index, 1, data);
       return { ...state, [data.parentId]: comment };
+    case DELETE_COMMENT :
+      console.log('DELETE_COMMENT', state, data);
+      return { ...state, [data.id]: data };
     default:
       return state;
   }

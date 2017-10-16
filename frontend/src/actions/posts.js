@@ -7,6 +7,7 @@ export const GET_POSTS = 'GET_POSTS';
 export const GET_POST = 'GET_POST';
 export const UPDATE_POST = 'UPDATE_POST';
 export const VOTE_POST = 'VOTE_POST';
+export const DELETE_POST = 'DELETE_POST';
 
 export function createPost(post) {
   console.log('createPost action');
@@ -65,5 +66,17 @@ export function votePost(postId, post) {
         data,
       });
     }).then(() => {dispatch(getPost(postId))});
+  };
+};
+
+export function deletePost(postId) {
+  console.log('deletePost action');
+  return dispatch => {
+    ReadableAPI.deletePost(postId).then((data) => {
+      dispatch({
+        type: DELETE_POST,
+        data,
+      });
+    }).then(() => {dispatch(getAllPosts())});
   };
 };

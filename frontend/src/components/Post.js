@@ -6,6 +6,7 @@ import _ from 'lodash';
 import { Link } from 'react-router-dom';
 import CreateEditComment from './CreateEditComment';
 import Vote from './Vote';
+import Delete from './Delete';
 
 class Post extends Component {
   componentDidMount() {
@@ -50,6 +51,8 @@ class Post extends Component {
             {comments.map((comment) => (
               <div key={comment.id}>
                 <h5>{comment.author} ({getDate(comment.timestamp)})</h5>
+                <Delete source={comment} type="comment"/>
+                <span> | </span>
                 <Link to={`${this.props.match.url}/${comment.id}/edit`}>[Edit comment]</Link>
                 <span> | </span>
                 <Vote source={comment} type="comment"/>

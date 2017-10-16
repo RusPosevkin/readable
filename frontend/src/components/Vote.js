@@ -26,7 +26,6 @@ class Vote extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  // debugger;
   return {};
 };
 

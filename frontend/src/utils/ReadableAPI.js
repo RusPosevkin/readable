@@ -23,6 +23,13 @@ export const getPost = (id) =>
   fetch(`${api}/posts/${id}`, { headers })
     .then(res => res.json());
 
+export const deletePost = (id) =>
+  fetch(`${api}/posts/${id}`, {
+      method: 'DELETE',
+      headers,
+    })
+    .then(res => res.json());
+
 export const createPost = (post) =>
   fetch(`${api}/posts/`, {
       method: 'POST',
@@ -76,5 +83,12 @@ export const voteComment = (id, comment) =>
       method: 'POST',
       headers,
       body: JSON.stringify(comment),
+    })
+    .then(res => res.json());
+
+export const deleteComment = (id) =>
+  fetch(`${api}/comments/${id}`, {
+      method: 'DELETE',
+      headers,
     })
     .then(res => res.json());
