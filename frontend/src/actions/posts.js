@@ -40,7 +40,6 @@ export function getPost(postId) {
         type: GET_POST,
         data,
       });
-      dispatch(getComments(postId));
     }).then((data) => console.log('getPost done', data));
   };
 };

@@ -11,6 +11,7 @@ class Post extends Component {
   componentDidMount() {
     const postId = _.get(this.props, 'match.params.postId');
     this.props.getPost(postId);
+    this.props.getComments(postId);
   };
 
   render() {
@@ -50,6 +51,8 @@ class Post extends Component {
               <div key={comment.id}>
                 <h5>{comment.author} ({getDate(comment.timestamp)})</h5>
                 <Link to={`${this.props.match.url}/${comment.id}/edit`}>[Edit comment]</Link>
+                <span> | </span>
+                <Vote source={comment} type="comment"/>
                 <p>{comment.body}</p>
               </div>
             ))}

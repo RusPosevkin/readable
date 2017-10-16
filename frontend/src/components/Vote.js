@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { votePost } from '../actions/posts';
+import { voteComment } from '../actions/comments';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +9,8 @@ class Vote extends Component {
 
   voteItem(option) {
     const { id } = this.props.source;
-    this.props.votePost(id, { option });
+    const {votePost, voteComment, type } = this.props;
+    (type === 'post') ? votePost(id, { option }) : voteComment(id, { option });
   };
 
   render() {
@@ -23,10 +25,12 @@ class Vote extends Component {
   }
 }
 
-function mapStateToProps() {
+function mapStateToProps(state, ownProps) {
+  // debugger;
   return {};
 };
 
 export default connect(mapStateToProps, {
   votePost,
+  voteComment,
 })(Vote);

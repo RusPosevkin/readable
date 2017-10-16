@@ -4,6 +4,7 @@ export const GET_COMMENTS = 'GET_COMMENTS';
 export const GET_COMMENT = 'GET_COMMENT';
 export const CREATE_COMMENT = 'CREATE_COMMENT';
 export const UPDATE_COMMENT = 'UPDATE_COMMENT';
+export const VOTE_COMMENT = 'VOTE_COMMENT';
 
 export function getComments(postId) {
   return dispatch => {
@@ -56,5 +57,17 @@ export function updateComment(commentId, comment) {
         data,
       });
     });
+  };
+};
+
+export function voteComment(commentId, comment) {
+  console.log('voteComment action');
+  return dispatch => {
+    ReadableAPI.voteComment(commentId, comment).then((data) => {
+      dispatch({
+        type: VOTE_COMMENT,
+        data,
+      });
+    }).then(() => {dispatch(getComment(commentId))});
   };
 };
