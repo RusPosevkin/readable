@@ -5,6 +5,7 @@ import Vote from './Vote';
 import _ from 'lodash';
 import Delete from './Delete';
 import { Link } from 'react-router-dom';
+import PostsSort from './PostSort';
 
 class PostsList extends Component {
   componentDidMount() {
@@ -12,17 +13,18 @@ class PostsList extends Component {
   };
 
   render() {
-    const { posts, category } = this.props;
+    const { posts, category, sort } = this.props;
     console.log('render ->', posts);
 
     // TODO: change sortBy method based on user's choice
-    const sortedPosts = _.sortBy(posts, (post) => post.timeStamp );
+    const sortedPosts = _.sortBy(posts, [sort]);
 
     const header = category ? `All posts in category "${category}"`: 'All Posts List';
     return (
       <div className="posts">
         <h1>{header}</h1>
         <div>
+          <PostsSort />
           {sortedPosts.length ? sortedPosts.map((post) => {
             const url = ['/', post.category, '/', post.id].join('');
             return (
@@ -44,14 +46,16 @@ class PostsList extends Component {
 function mapStateToProps(state, ownProps) {
   console.log('PostsList mapStateToProps', state, ownProps);
   const category = _.get(ownProps, 'match.params.category');
+  const { posts, sort } = state;
   if (category) {
     return {
-        posts: _.pickBy(state.posts, (post) => post.category === category),
+        posts: _.pickBy(posts, (post) => post.category === category),
         category,
+        sort,
     };
   }
 
-  return { posts: state.posts };
+  return { posts, sort };
 };
 
 export default connect(mapStateToProps, {
