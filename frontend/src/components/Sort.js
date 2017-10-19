@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { changeSort } from '../actions/sort';
 import { connect } from 'react-redux';
 
-class PostSort extends Component {
+class Sort extends Component {
 
   changeSort(event) {
     this.props.changeSort(event.target.value);
@@ -28,4 +28,4 @@ function mapStateToProps(state, ownProps) {
 
 export default connect(mapStateToProps, {
   changeSort,
-})(PostSort);
+})(Sort);

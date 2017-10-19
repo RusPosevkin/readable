@@ -5,7 +5,7 @@ import Vote from './Vote';
 import _ from 'lodash';
 import Delete from './Delete';
 import { Link } from 'react-router-dom';
-import PostSort from './PostSort';
+import Sort from './Sort';
 
 class PostsList extends Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class PostsList extends Component {
   render() {
     const { posts, category, sort } = this.props;
     console.log('render ->', posts);
-    
+
     const sortedPosts = _.sortBy(posts, [sort]);
 
     const header = category ? `All posts in category "${category}"`: 'All Posts List';
@@ -23,7 +23,7 @@ class PostsList extends Component {
       <div className="posts">
         <h1>{header}</h1>
         <div>
-          <PostSort />
+          <Sort />
           {sortedPosts.length ? sortedPosts.map((post) => {
             const url = ['/', post.category, '/', post.id].join('');
             return (

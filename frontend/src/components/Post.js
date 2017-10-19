@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import CreateEditComment from './CreateEditComment';
 import Vote from './Vote';
 import Delete from './Delete';
-import PostSort from './PostSort';
+import Sort from './Sort';
 
 class Post extends Component {
   componentDidMount() {
@@ -50,7 +50,7 @@ class Post extends Component {
             {sortedComments && sortedComments.length ? (
               <div className="comments">
                 <h3>Comments</h3>
-                <PostSort />
+                <Sort />
                 {sortedComments.map((comment) => (
                   <div key={comment.id}>
                     <h5>{comment.author} ({getDate(comment.timestamp)})</h5>
