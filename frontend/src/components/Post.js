@@ -34,34 +34,42 @@ class Post extends Component {
 
     return (
       <div className="post">
-        {content && (
+        {content && !content.deleted ? (
           <div>
-            <h1>{content.title}</h1>
-            <h2>{content.author} {content.timestamp ? (getDate(content.timestamp)) : ''}</h2>
-              <Link to={`${this.props.match.url}/edit`}>[Edit post]</Link>
-              <span> | </span>
-              <Vote source={content} type="post"/>
+            <div>
+              <h1>{content.title}</h1>
+              <h2>{content.author} {content.timestamp ? (getDate(content.timestamp)) : ''}</h2>
+                <Link to={`${this.props.match.url}/edit`}>[Edit post]</Link>
+                <span> | </span>
+                <Vote source={content} type="post"/>
 
-            <p>{content.body}</p>
+              <p>{content.body}</p>
+            </div>
+            {comments && comments.length ? (
+              <div className="comments">
+                <h3>Comments</h3>
+                <PostSort />
+                {comments.map((comment) => (
+                  <div key={comment.id}>
+                    <h5>{comment.author} ({getDate(comment.timestamp)})</h5>
+                    <Delete source={comment} type="comment"/>
+                    <span> | </span>
+                    <Link to={`${this.props.match.url}/${comment.id}/edit`}>[Edit comment]</Link>
+                    <span> | </span>
+                    <Vote source={comment} type="comment"/>
+                    <p>{comment.body}</p>
+                  </div>
+                ))}
+              </div>
+            ) : ''}
+            <CreateEditComment postId={postId}/>
+          </div>
+        ) : (
+          <div>
+            <p>Post Not Found</p>
+            <Link to="/">Back to Main</Link>
           </div>
         )}
-        {comments && comments.length ? (
-          <div className="comments">
-            <h3>Comments</h3>
-            {comments.map((comment) => (
-              <div key={comment.id}>
-                <h5>{comment.author} ({getDate(comment.timestamp)})</h5>
-                <Delete source={comment} type="comment"/>
-                <span> | </span>
-                <Link to={`${this.props.match.url}/${comment.id}/edit`}>[Edit comment]</Link>
-                <span> | </span>
-                <Vote source={comment} type="comment"/>
-                <p>{comment.body}</p>
-              </div>
-            ))}
-          </div>
-        ) : ''}
-        <CreateEditComment postId={postId}/>
       </div>
     );
   }
