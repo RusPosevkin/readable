@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { Redirect } from 'react-router';
 import { browserHistory } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const DEFAULT_STATE = {
   body: '',
@@ -76,8 +77,18 @@ class CreateEditComment extends Component {
 
   render() {
     const actionVerb = this.state.isEditMode ? 'Update' : 'Create';
+    const { category, postId } = _.get(this.props.match, 'params', {});
     return (
       <div className="create-comment">
+        {this.state.isEditMode && (
+          <nav>
+            <Link to="/">Main</Link>
+            <span> –> </span>
+            <Link to={`/${category}`}>{category}</Link>
+            <span> –> </span>
+            <Link to={`/${category}/${postId}`}>Post</Link>
+          </nav>
+        )}
         <h3>{`${actionVerb} Comment`}</h3>
         <form onSubmit={this.onSubmit.bind(this)}>
           <p>

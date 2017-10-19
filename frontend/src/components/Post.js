@@ -33,11 +33,16 @@ class Post extends Component {
     const commentsData = _.get(this.props, 'comments', {});
     const comments = commentsData[postId];
     const sortedComments = _.sortBy(comments, [this.props.sort]);
-
+    const category = this.props.match.params.category;
     return (
       <div className="post">
         {content && !content.deleted ? (
           <div>
+          <nav>
+            <Link to="/">Main</Link>
+            <span> –> </span>
+            <Link to={`/${category}`}>{category}</Link>
+          </nav>
             <div>
               <h1>{content.title}</h1>
               <h2>{content.author} {content.timestamp ? (getDate(content.timestamp)) : ''}</h2>

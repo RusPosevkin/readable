@@ -21,6 +21,11 @@ class PostsList extends Component {
     const header = category ? `All posts in category "${category}"`: 'All Posts List';
     return (
       <div className="posts">
+        {this.props.category && (
+          <nav>
+            <Link to="/">Main</Link>
+          </nav>
+        )}
         <h1>{header}</h1>
         <div>
           <Sort />

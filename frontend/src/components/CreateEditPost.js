@@ -4,6 +4,7 @@ import { createPost, updatePost } from '../actions/posts';
 import { connect } from 'react-redux';
 import { getPost } from '../actions/posts';
 import _ from 'lodash';
+import { Link } from 'react-router-dom';
 
 const DEFAULT_STATE = {
   title: '',
@@ -87,8 +88,18 @@ class CreateEditPost extends Component {
 
   render() {
     const actionVerb = this.state.isEditMode ? 'Update' : 'Create';
+    const { category, postId } = _.get(this.props.match, 'params', {});
     return (
       <div className="create-post">
+        {this.state.isEditMode && (
+          <nav>
+            <Link to="/">Main</Link>
+            <span> –> </span>
+            <Link to={`/${category}`}>{category}</Link>
+            <span> –> </span>
+            <Link to={`/${category}/${postId}`}>Post</Link>
+          </nav>
+        )}
         <h3>{`${actionVerb} Post`}</h3>
         <form onSubmit={this.onSubmit.bind(this)}>
           <p>
