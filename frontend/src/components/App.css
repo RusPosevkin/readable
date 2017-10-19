@@ -22,3 +22,11 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+.post-item,
+.comment-item,
+.navigation {
+  border: 1px solid black;
+  padding: 10px;
+  margin: 10px;
+}

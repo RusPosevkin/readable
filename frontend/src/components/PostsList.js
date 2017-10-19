@@ -22,7 +22,7 @@ class PostsList extends Component {
     return (
       <div className="posts">
         {this.props.category && (
-          <nav>
+          <nav className="navigation">
             <Link to="/">Main</Link>
           </nav>
         )}
@@ -32,12 +32,15 @@ class PostsList extends Component {
           {sortedPosts.length ? sortedPosts.map((post) => {
             const url = ['/', post.category, '/', post.id].join('');
             return (
-              <div key={post.id}>
-                <a href={url}>{post.title}</a>
-                <span> | </span>
-                <Delete source={post} type="post"/>
-                <span> | </span>
-                <Vote source={post} type="post"/>
+              <div key={post.id} className="post-item">
+                <div>
+                  <a href={url}>{post.title}</a>
+                  <span> | </span>
+                  <Delete source={post} type="post"/>
+                  <span> | </span>
+                  <Vote source={post} type="post"/>
+                </div>
+                <span>by {post.author}</span>
               </div>
             );
           }) : 'There is no any post :('}

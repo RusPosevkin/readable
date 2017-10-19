@@ -38,7 +38,7 @@ class Post extends Component {
       <div className="post">
         {content && !content.deleted ? (
           <div>
-          <nav>
+          <nav className="navigation">
             <Link to="/">Main</Link>
             <span> –> </span>
             <Link to={`/${category}`}>{category}</Link>
@@ -54,10 +54,10 @@ class Post extends Component {
             </div>
             {sortedComments && sortedComments.length ? (
               <div className="comments">
-                <h3>Comments</h3>
+                <h3>Comments ({sortedComments.length} total)</h3>
                 <Sort />
                 {sortedComments.map((comment) => (
-                  <div key={comment.id}>
+                  <div key={comment.id} className="comment-item">
                     <h5>{comment.author} ({getDate(comment.timestamp)})</h5>
                     <Delete source={comment} type="comment"/>
                     <span> | </span>

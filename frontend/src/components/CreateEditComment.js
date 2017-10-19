@@ -81,7 +81,7 @@ class CreateEditComment extends Component {
     return (
       <div className="create-comment">
         {this.state.isEditMode && (
-          <nav>
+          <nav className="navigation">
             <Link to="/">Main</Link>
             <span> –> </span>
             <Link to={`/${category}`}>{category}</Link>
