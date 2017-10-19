@@ -64,8 +64,7 @@ class CreateEditComment extends Component {
       author,
       timestamp,
       id: Math.random().toString(36).substr(-8),
-      parentId: this.props.postId
-      //TODO: add parentId
+      parentId: this.props.postId,
     };
     this.props.createComment(comment);
     this.setDefaultState();

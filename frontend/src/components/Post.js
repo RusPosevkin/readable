@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 import CreateEditComment from './CreateEditComment';
 import Vote from './Vote';
 import Delete from './Delete';
+import PostSort from './PostSort';
 
 class Post extends Component {
   componentDidMount() {
@@ -31,6 +32,7 @@ class Post extends Component {
     const content = this.props.posts[postId];
     const commentsData = _.get(this.props, 'comments', {});
     const comments = commentsData[postId];
+    const sortedComments = _.sortBy(comments, [this.props.sort]);
 
     return (
       <div className="post">
@@ -45,11 +47,11 @@ class Post extends Component {
 
               <p>{content.body}</p>
             </div>
-            {comments && comments.length ? (
+            {sortedComments && sortedComments.length ? (
               <div className="comments">
                 <h3>Comments</h3>
                 <PostSort />
-                {comments.map((comment) => (
+                {sortedComments.map((comment) => (
                   <div key={comment.id}>
                     <h5>{comment.author} ({getDate(comment.timestamp)})</h5>
                     <Delete source={comment} type="comment"/>
@@ -77,10 +79,11 @@ class Post extends Component {
 
 function mapStateToProps(state, ownProps) {
   console.log('Post mapStateToProps', state, ownProps);
-  const { posts, comments } = state;
+  const { posts, comments, sort } = state;
   return {
     posts,
     comments,
+    sort,
   };
 };
 
