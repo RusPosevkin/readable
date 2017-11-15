@@ -10,7 +10,6 @@ export const DELETE_COMMENT = 'DELETE_COMMENT';
 export function getComments(postId) {
   return dispatch => {
     ReadableAPI.getPostComments(postId).then((data) => {
-      console.log('getComments action', data);
       return dispatch({
         type: GET_COMMENTS,
         data: {
@@ -18,14 +17,13 @@ export function getComments(postId) {
           id: postId
         },
       });
-    }).then((data) => console.log('getComments done', data));
+    });
   };
 };
 
 export function getComment(commentId) {
   return dispatch => {
     ReadableAPI.getComment(commentId).then((data) => {
-      console.log('getComment action', data);
       return dispatch({
         type: GET_COMMENT,
         data: {
@@ -33,12 +31,11 @@ export function getComment(commentId) {
           id: commentId
         },
       });
-    }).then((data) => console.log('getComments done', data));
+    });
   };
 };
 
 export function createComment(comment) {
-  console.log('createComment action');
   return dispatch => {
     ReadableAPI.createComment(comment).then((data) => {
       dispatch({
@@ -50,7 +47,6 @@ export function createComment(comment) {
 };
 
 export function updateComment(commentId, comment) {
-  console.log('updateComment action');
   return dispatch => {
     ReadableAPI.updateComment(commentId, comment).then((data) => {
       dispatch({
@@ -62,7 +58,6 @@ export function updateComment(commentId, comment) {
 };
 
 export function voteComment(commentId, comment) {
-  console.log('voteComment action');
   return dispatch => {
     ReadableAPI.voteComment(commentId, comment).then((data) => {
       dispatch({
@@ -74,7 +69,6 @@ export function voteComment(commentId, comment) {
 };
 
 export function deleteComment(commentId, parentId) {
-  console.log('deleteComment action');
   return dispatch => {
     ReadableAPI.deleteComment(commentId).then((data) => {
       dispatch({
