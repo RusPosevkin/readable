@@ -14,11 +14,13 @@ class PostsList extends Component {
 
   render() {
     const { posts, category, sort } = this.props;
-    console.log('render ->', posts);
 
     const sortedPosts = _.sortBy(posts, [sort]);
 
-    const header = category ? `All posts in category "${category}"`: 'All Posts List';
+    const header = category
+      ? `All posts in category "${category}"`
+      : 'All Posts List';
+
     return (
       <div className="posts">
         {this.props.category && (
@@ -51,7 +53,6 @@ class PostsList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('PostsList mapStateToProps', state, ownProps);
   const category = _.get(ownProps, 'match.params.category');
   const { posts, sort } = state;
   if (category) {

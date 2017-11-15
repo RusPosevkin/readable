@@ -26,7 +26,6 @@ export default function comments(state = {}, action) {
       comment.splice(index, 1, data);
       return { ...state, [data.parentId]: comment };
     case DELETE_COMMENT :
-      console.log('DELETE_COMMENT', state, data);
       return { ...state, [data.id]: data };
     default:
       return state;

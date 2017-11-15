@@ -83,7 +83,6 @@ class Post extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('Post mapStateToProps', state, ownProps);
   const { posts, comments, sort } = state;
   return {
     posts,

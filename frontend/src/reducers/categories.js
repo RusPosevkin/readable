@@ -7,7 +7,6 @@ export default function categories(state = [], action) {
 
   switch (action.type) {
     case GET_CATEGORIES:
-      console.log('GET_CATEGORIES', state, data);
       return data;
     default:
       return state;

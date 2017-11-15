@@ -46,7 +46,6 @@ class CreateEditPost extends Component {
   };
 
   updatePost() {
-    console.log('updatePost');
     const { title, body, category, author } = this.state;
     const timestamp = Date.now();
     const post = {
@@ -140,8 +139,6 @@ class CreateEditPost extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('CreateEditPost mapStateToProps', state, ownProps);
-
   const { posts } = state;
   return {
     posts,

@@ -117,8 +117,6 @@ class CreateEditComment extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  console.log('CreateEditComment mapStateToProps', state, ownProps);
-
   const { comments } = state;
   return {
     comments,
